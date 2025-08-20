@@ -1,4 +1,4 @@
-# ev-charging-load-forecasting
+#EV-CHARGING-LOAD-FORECASTING
 
 "The future of mobility is electric. The future of energy is intelligent. SmartCharge bridges them."
 ---
