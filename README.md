@@ -14,15 +14,15 @@
   ---
   ## 📁 Repository Structure
   Forecast next-day/hourly EV charging demand/
-├── README.md                 # Project overview                 
+├── README.md                 # Project overview   <br>              
 ├── models/                   #   01_data_preprocessing.ipynb
 │                             #   02_exploratory_data_analysis.ipynb
 │                             # 03_baseline_forecasting.ipynb
 │                             # 04_ml_forecasting.ipynb
 │                             # 05_evaluation.ipynb
-│                             # 06_results_visualization.ipynb
-├── src/                      # Source code (modular functions/scripts)
-├── notebooks/             # Jupyter notebooks for analysis
+│                             # 06_results_visualization.ipynb <br>
+├── src/                      # Source code (modular functions/scripts) <br>
+├── notebooks/             # Jupyter notebooks for analysis <br>
 ├── requirements.txt       # Python dependencies
 
 ---
