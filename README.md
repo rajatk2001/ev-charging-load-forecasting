@@ -2,7 +2,15 @@
 
 "The future of mobility is electric. The future of energy is intelligent. SmartCharge bridges them."
 ---
-
+## 🎯 Motivation  
+- The Netherlands is a European leader in **EV adoption and workplace charging infrastructure**.  
+- Office charging behavior is **unique**: weekday-dominated, linked to work hours, and influenced by holidays.  
+- Accurate demand forecasting helps:  
+  - **Grid operators** manage local electricity loads.  
+  - **Businesses** optimize office charging stations.  
+  - **Policy makers** plan for future EV adoption.
+ 
+    ---
 ## 🚀 Features
 * End-to-End Data Pipeline
 *  Machine Learning & Deep Learning Models
@@ -10,69 +18,115 @@
 * Model Evaluation Framework
 * Industry Relevance & Business Impact
 
-  ---
-  ## 📁 Repository Structure
-  **Forecast next-day/hourly EV charging demand/** <>
-1. README.md /                 # Project overview
-2. data/                      # Raw and preprocessed datasets
-3. models/
-   -data_preprocessing.ipynb
-   - exploratory_data_analysis.ipynb
-   - baseline_forecasting.ipynb
-   - ml_forecasting.ipynb
-   - evaluation.ipynb
-   - results_visualization.ipynb
-  4. notebooks/             # Jupyter notebooks for analysis
-  5. requirements.txt       # Python dependencies
----
+  ----
+
+  
 ## 📊 Dataset  
-**Source**: [ACN EV Charging Dataset (Caltech)](https://ev.caltech.edu/dataset)  
-- Contains real EV charging sessions:  
-  - `session_id`, `station_id`  
-  - `start_time`, `end_time`, `duration`  
-  - `energy_kWh`, `max_power`  
-- Clean CSV format, easy to preprocess.
+**Source**: Real-world EV charging sessions at **office locations in the Netherlands** (2020–2024).  
+- **Features**:  
+  - `session_start`, `session_end` → timestamps  
+  - `energy_delivered (kWh)`  
+  - `station_id`
+  - **Preprocessing**:  
+  - Filtered for office locations.  
+  - Aggregated into **daily energy demand (kWh)**.  
+  - Created features: weekdays/weekends, rolling averages, lags, holidays.
+
 ---
-## 🧠 Workflow  
 
-1. **Problem Statement** – Forecast next-day/hourly EV charging demand.  
-2. **Data Preprocessing** – Convert logs to time-series, create features.  
-3. **EDA** – Explore peak hours, weekday/weekend patterns, seasonal cycles.  
-4. **Baseline Models** – Moving Average, ARIMA, Prophet.  
-5. **ML/DL Models** – XGBoost, LSTM, GRU, Transformers.  
-6. **Evaluation** – Compare models using RMSE, MAE, MAPE.  
-7. **Results** – Plots + error tables, highlighting best-performing model.  
-8. **Optional** – Streamlit dashboard for interactive forecasts.
-----
-## 📈 Sample Results  
+## 🔍 Methodology  
 
-| Model       | RMSE   | MAE   | MAPE  |
-|-------------|--------|-------|-------|
-| ARIMA       | 52.4   | 38.2  | 9.8%  |
-| Prophet     | 47.1   | 35.7  | 8.5%  |
-| XGBoost     | 43.9   | 32.1  | 7.9%  |
-| LSTM        | 39.3   | 28.4  | 6.7%  |
-| Transformer | 37.5   | 27.1  | 6.1%  |
+### 1. Data Preprocessing  
+- Cleaned timestamps and missing values.  
+- Resampled into **daily demand** time series.  
+- Added calendar-based features for better forecasting.  
+
+### 2. Exploratory Data Analysis (EDA)  
+- **Trend**: Rising office EV demand from 2020 → 2024.  
+- **Seasonality**: Weekly cycles (low weekends), yearly dips (holidays).  
+- **Office Behavior**: High demand during working days/hours.  
+
+### 3. Forecasting Models  
+-  **Baseline**:  
+  - Moving Average (MA7, MA30).  
+- **Statistical**:  
+  - ARIMA → captures trend and seasonality.  
+- **Machine Learning**:  
+  - XGBoost Regression → captures nonlinear relationships, weekday-weekend effects, and holiday dips.  
+
+---
+### 4. Evaluation  
+- **Train**: 2020–2023.  
+- **Test**: 2024.  
+- Metrics: **RMSE, MAE, MAPE**.
+
+  ---
+  
+## 📊 Results  
+
+| Model            | Strengths                            | Weaknesses                           |
+|------------------|--------------------------------------|---------------------------------------|
+| Moving Average   | Simple, baseline trend capture        | Lagged response to sudden changes     |
+| ARIMA            | Good at trend + seasonality           | Struggled with irregular fluctuations |
+| **XGBoost** ✅   | Best overall performance, low error   | Needs feature engineering             |
+
+➡ **XGBoost outperformed ARIMA and baseline models**, producing the most reliable forecasts for office EV charging demand in 2024.  
+
+
+## ✅ Conclusion  
+- **ARIMA** → effective for capturing general trend and seasonality but weaker on irregular weekday office patterns.  
+- **XGBoost** → leveraged nonlinear features, weekday/weekend cycles, and holiday effects for higher accuracy.  
+- **Impact**: This forecasting approach can directly support **grid planning, office EV station optimization, and policy decision-making** in the Netherlands.  
+
+---
+
+## 📌 Tech Stack  
+- **Python** (Pandas, Numpy, Scikit-learn, Statsmodels)  
+- **ARIMA** (statsmodels)  
+- **XGBoost**  
+- **Matplotlib / Seaborn** (visualization)  
+- **Jupyter Notebooks**  
+
 
 📊 Forecast Visualization:  
-![Forecast Plot](assets/sample_forecast.png) 
----
-## 🚀 Business Value     
-- 💰 **Dynamic Pricing** – optimize tariffs based on predicted demand.
-- ⚡ **Grid Operators** – anticipate demand spikes & prevent overloads.
-- 🏙️ **City Planners** – decide where to install new charging stations.
-----
-## 🔹 Future Work
+## 📊 Results Visualization  
 
-*
----
-# Install dependencies
-pip install -r requirements.txt
+To check how well the models worked, we compared the **predicted demand** with the **actual demand in 2024**.  
 
-# Run notebooks
-jupyter notebook
----
-## 📞 Contact
+### 🔹 ARIMA Forecast  
+The ARIMA model could follow the overall trend but missed some sudden changes.  
 
-Created by **RAJAT KUMAR MISHRAr**. Reach out via [GitHub Issues](...) for questions or suggestions.
+![ARIMA Forecast](images/arima_forecast.png)  
+
+---
+
+### 🔹 XGBoost Forecast  
+The XGBoost model gave much closer predictions, especially for weekdays and holidays.  
+
+![XGBoost Forecast](images/xgboost_forecast.png)  
+
+---
+
+### 🔹 Model Comparison  
+Here we can see all three lines together:  
+- **Blue** → Actual demand  
+- **Orange** → ARIMA predictions  
+- **Green** → XGBoost predictions  
+
+XGBoost clearly follows the real data better than ARIMA.  
+
+![Model Comparison](images/model_comparison.png)  
+
+---
+
+## 🤝 Contributing  
+Feel free to fork this repo and suggest improvements via Pull Requests.  
+
+---
+
+## 📧 Contact  
+👤 **Name** - Rajat kumar Mishra  
+📩 [rarajatk2001@gmail.com]  
+🔗 [https://www.linkedin.com/in/rajat-kumar-mishra-a662ba368]  
+
 
