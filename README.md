@@ -91,7 +91,10 @@
 
 
 📊 Forecast Visualization:  
-
+<img width="996" height="547" alt="Visualization" src="https://github.com/user-attachments/assets/1199524d-1312-4483-bdf3-0a78bdc1200d" />
+<img width="1390" height="490" alt="Actual vs Predicted" src="https://github.com/user-attachments/assets/467c87ec-158b-4b3b-a1fe-97f4ee49ac1d" />
+<img width="1189" height="590" alt="Residual Histogram" src="https://github.com/user-attachments/assets/2d3ec5f2-c1d5-422c-a71c-b3a4826f0bc6" />
+<img width="1189" height="790" alt="Residual ACF (Autocorrelation)" src="https://github.com/user-attachments/assets/2fb36fb7-3c85-4370-b468-7fc3aa2c876d" />
 
 ## 🤝 Contributing  
 Feel free to fork this repo and suggest improvements via Pull Requests.  
