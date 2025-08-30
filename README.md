@@ -63,12 +63,14 @@
   ---
   
 ## 📊 Results  
+## 📊 Forecasting Results (2024 Test Data)
 
-| Model            | Strengths                            | Weaknesses                           |
-|------------------|--------------------------------------|---------------------------------------|
-| Moving Average   | Simple, baseline trend capture        | Lagged response to sudden changes     |
-| ARIMA            | Good at trend + seasonality           | Struggled with irregular fluctuations |
-| **XGBoost** ✅   | Best overall performance, low error   | Needs feature engineering             |
+| Model            | MAE     | RMSE    | MAPE %   | SMAPE %   | Strengths                          | Weaknesses                           |
+|------------------|---------|---------|----------|-----------|------------------------------------|---------------------------------------|
+| MA(7)            | 0.0966  | 0.9160  | 100.00   | 2.22      | Very simple baseline                | Ignores seasonality & trend           |
+| MA(30)           | 0.0966  | 0.9160  | 100.00   | 2.22      | Smooths longer-term trend           | Misses short-term fluctuations        |
+| ARIMA            | 0.1556  | 0.9116  | 99.31    | 199.97    | Good at capturing trend & seasonality | Weak on irregular office-day spikes   |
+| **XGBoost** ✅   | 0.3078  | 0.9297  | 92.70    | 199.70    | Best generalization, non-linear effects | Needs careful feature engineering     |
 
 ➡ **XGBoost outperformed ARIMA and baseline models**, producing the most reliable forecasts for office EV charging demand in 2024.  
 
@@ -89,35 +91,7 @@
 
 
 📊 Forecast Visualization:  
-## 📊 Results Visualization  
 
-To check how well the models worked, we compared the **predicted demand** with the **actual demand in 2024**.  
-
-### 🔹 ARIMA Forecast  
-The ARIMA model could follow the overall trend but missed some sudden changes.  
-
-![ARIMA Forecast](images/arima_forecast.png)  
-
----
-
-### 🔹 XGBoost Forecast  
-The XGBoost model gave much closer predictions, especially for weekdays and holidays.  
-
-![XGBoost Forecast](images/xgboost_forecast.png)  
-
----
-
-### 🔹 Model Comparison  
-Here we can see all three lines together:  
-- **Blue** → Actual demand  
-- **Orange** → ARIMA predictions  
-- **Green** → XGBoost predictions  
-
-XGBoost clearly follows the real data better than ARIMA.  
-
-![Model Comparison](images/model_comparison.png)  
-
----
 
 ## 🤝 Contributing  
 Feel free to fork this repo and suggest improvements via Pull Requests.  
